@@ -1,0 +1,171 @@
+# 初期設定
+
+## Apacheの起動(1号機)
+
+Apacheの起動(1号機)
+~~~
+# /sbin/service httpd start
+Starting httpd:                                            [  OK  ]
+~~~
+
+
+
+リッスンするポートの確認
+~~~
+# netstat -anp | grep 80
+tcp        0      0 :::80                       :::*                        LISTEN      28290/httpd
+
+
+
+# netstat -anp | grep 443
+tcp        0      0 :::443                      :::*                        LISTEN      28290/httpd
+~~~
+
+
+
+プロセスの確認
+~~~
+# ps -ef | grep httpd | grep -v grep
+
+root     28290     1  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28292 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28293 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28294 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28295 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28296 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28297 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28298 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+apache   28299 28290  0 11:19 ?        00:00:00 /usr/sbin/httpd
+…
+~~~
+
+
+
+## Tomcatの起動(1号機)
+
+
+Tomcatの起動(1号機)
+~~~
+# /sbin/service osstech-tomcat7 start
+
+Tomcat started.
+[OK]
+~~~
+
+
+
+リッスンするポートの確認
+~~~
+# netstat -anp | grep 8009
+
+tcp        0      0 :::8009                     :::*                        LISTEN      28386/java
+~~~
+
+
+
+プロセスの確認
+~~~
+# ps -ef | grep tomcat7 | grep -v grep
+
+tomcat7  28386     1  2 12:05 pts/0    00:00:23 /usr/lib/jvm/jre-1.7.0/bin/java -Djava.util.logging.config.file=/opt/osstech/share/tomcat7/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Xmx2048M -Xms512M -XX:MaxPermSize=256m -Djava.endorsed.dirs=/opt/osstech/share/tomcat7/endorsed -classpath /opt/osstech/share/tomcat7/bin/bootstrap.jar:/opt/osstech/share/tomcat7/bin/tomcat-juli.jar -Dcatalina.base=/opt/osstech/share/tomcat7 -Dcatalina.home=/opt/osstech/share/tomcat7 -Djava.io.tmpdir=/opt/osstech/var/cache/tomcat7/temp org.apache.catalina.startup.Bootstrap start
+~~~
+
+
+## 初期設定(1台目)
+
+初期設定画面の表示
+![初期設定画面](image/2Setting_4_1.png)
+
+
+
+
+
+カスタム設定を開始する
+![カスタム設定画面](image/2Setting_4_2.png)
+
+
+
+
+
+amadminのパスワードを設定する
+![パスワード設定画面](image/2Setting_4_3.png)
+
+![手順２:サーバー設定画面](image/2Setting_4_4.png)
+
+
+
+
+
+サーバー設定を実施する
+![サーバー設定画面](image/2Setting_4_7.png)
+
+![手順３：設定データストア設定画面](image/2Setting_4_8.png)
+
+
+
+
+
+設定データストアの設定を実施する
+![手順4：ユーザーデータストア設定画面](image/2Setting_4_10.png)
+
+
+
+
+ユーザーデータストアの設定を実施する
+![OpenAMのユーザーデータストア選択後](image/2Setting_4_11.png)
+
+![手順5：サイト設定設定画面](image/2Setting_4_12.png)
+
+
+
+
+
+サイト設定を実施する
+![手順6：デフォルトのポリシーエージェントユーザー画面](image/2Setting_4_14.png)
+
+
+
+
+
+デフォルトのポリシーエージェントユーザーのパスワードを設定する
+![パスワード入力画面](image/2Setting_4_15.png)
+
+![設定ツールの概要と詳細画面](image/2Setting_4_16.png)
+
+
+
+
+
+設定ツールの概要と詳細
+![設定完了ダイアログ画面](image/2Setting_4_18.png)
+
+![ログイン画面](image/2Setting_4_19.png)
+
+
+
+
+
+管理者ユーザーでログイン
+![管理コンソール画面](image/2Setting_4_22.png)
+
+
+
+
+管理コンソールからのログアウト
+![ログアウト確認ダイアログ画面](image/2Setting_4_23.png)
+
+![ログアウト完了画面](image/2Setting_4_24.png)
+
+![再ログイン画面](image/2Setting_4_25.png)
+
+
+
+
+
+Tomcatの再起動
+~~~
+# /sbin/service osstech-tomcat7 restart
+
+Tomcat started.
+[OK]
+~~~
